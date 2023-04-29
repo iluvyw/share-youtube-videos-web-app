@@ -1,7 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  addDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { firebaseConfig } from "../config/firebase";
 import { IResponseUser } from "../interfaces/firebase";
+import { Response } from "../enums/response";
 
 const useFirestore = () => {
   initializeApp(firebaseConfig);
@@ -19,7 +27,51 @@ const useFirestore = () => {
     }
   };
 
-  return { getAllUsers };
+  const getUser = async (
+    username: string
+  ): Promise<IResponseUser | undefined> => {
+    try {
+      const collectionRef = collection(db, "users");
+      const q = query(collectionRef, where("username", "==", username));
+      const querySnapshot = await getDocs(q);
+      const docs: IResponseUser[] = [];
+      querySnapshot.forEach((doc) => {
+        const id = doc.id;
+        const username = doc.data().username;
+        const password = doc.data().password;
+        const salt = doc.data().salt;
+        docs.push({ id, username, password, salt });
+      });
+      if (docs[0]) {
+        return docs[0];
+      }
+      return undefined;
+    } catch (error) {
+      console.error(error);
+      return undefined;
+    }
+  };
+
+  const addUser = async (
+    username: string,
+    password: string,
+    salt: string
+  ): Promise<Response> => {
+    const collectionRef = collection(db, "users");
+    try {
+      await addDoc(collectionRef, {
+        username,
+        password,
+        salt,
+      });
+      return Response.SUCCESS;
+    } catch (error) {
+      console.error(error);
+      return Response.ERROR;
+    }
+  };
+
+  return { getAllUsers, addUser, getUser };
 };
 
 export { useFirestore };

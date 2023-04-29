@@ -1,14 +1,25 @@
 import Feed from "./components/Feed";
-import Nav from "./components/Nav";
-import { AuthProvider } from "./hooks/useAuth";
+import Layout from "./components/Layout";
+import Share from "./components/Share";
+import { AuthProvider, RequireAuth } from "./hooks/useAuth";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <AuthProvider>
-      <div>
-        <Nav />
-        <Feed />
-      </div>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Feed />} />
+          <Route
+            path="/share"
+            element={
+              <RequireAuth>
+                <Share />
+              </RequireAuth>
+            }
+          />
+        </Route>
+      </Routes>
     </AuthProvider>
   );
 }

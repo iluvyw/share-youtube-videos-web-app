@@ -1,5 +1,7 @@
+import { getLocalEnvVariable } from "../utils/localEnv";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optionale
-const apiKey = import.meta.env.FIREBASE_API_KEY;
+const apiKey = getLocalEnvVariable("VITE_FIREBASE_API_KEY");
 
 export const firebaseConfig = {
   apiKey,
