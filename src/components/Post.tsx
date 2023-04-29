@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { IVideo } from "../interfaces/video";
-import Youtube, { YouTubeProps } from "react-youtube";
 
 interface Props {
   data: IVideo;

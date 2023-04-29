@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth";
 import Post from "./Post";
 import { useFirestore } from "../hooks/useFirestore";
 import { IVideo } from "../interfaces/video";
