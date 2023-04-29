@@ -10,6 +10,7 @@ import {
 import { firebaseConfig } from "../config/firebase";
 import { IResponseUser } from "../interfaces/firebase";
 import { Response } from "../enums/response";
+import { IVideo } from "../interfaces/video";
 
 const useFirestore = () => {
   initializeApp(firebaseConfig);
@@ -71,7 +72,32 @@ const useFirestore = () => {
     }
   };
 
-  return { getAllUsers, addUser, getUser };
+  const getAllVideos = async () => {
+    try {
+      const collectionRef = collection(db, "videos");
+      const snapshot = await getDocs(collectionRef);
+      const videos = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+      }));
+      return videos as IVideo[];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  const addVideo = async (video: IVideo): Promise<Response> => {
+    const collectionRef = collection(db, "videos");
+    try {
+      await addDoc(collectionRef, video);
+      return Response.SUCCESS;
+    } catch (error) {
+      console.error(error);
+      return Response.ERROR;
+    }
+  };
+
+  return { getAllUsers, addUser, getUser, addVideo, getAllVideos };
 };
 
 export { useFirestore };

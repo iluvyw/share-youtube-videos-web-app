@@ -1,19 +1,40 @@
 import { FC } from "react";
+import { IVideo } from "../interfaces/video";
+import Youtube, { YouTubeProps } from "react-youtube";
 
-const Post: FC = () => {
+interface Props {
+  data: IVideo;
+}
+
+const Post: FC<Props> = ({ data }) => {
+  // const opts: YouTubeProps["opts"] = {
+  //   height: "360",
+  //   width: "500",
+  //   playerVars: {
+  //     // https://developers.google.com/youtube/player_parameters
+  //     autoplay: 0,
+  //   },
+  // };
+
   return (
-    <div className="border border-black w-full h-[500px] my-4 flex flex-row p-4 bg-white">
-      <div className="h-full w-2/3"></div>
-      <div className="h-full w-1/3 flex flex-col">
-        <h1 className="font-bold text-4xl">Title</h1>
-        <h2 className="text-xl">Shared by: anpham</h2>
-        <h3>Description</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique id
-          praesentium, deserunt quod quam voluptas, quis pariatur cumque,
-          voluptates rem atque sunt. Magnam explicabo maxime harum numquam
-          mollitia minima tenetur.
-        </p>
+    <div className="border border-black w-full h-[400px] my-4 flex flex-row p-4 bg-white">
+      <div className="h-full w-[800px] flex flex-row items-center">
+        <a href={data.url} target="_blank" className="h-full w-full">
+          <img
+            src={data.thumbnailUrl}
+            alt="thumbnail"
+            className="w-full h-full object-cover"
+          />
+        </a>
+        {/* <Youtube videoId={data.videoId} opts={opts} /> */}
+      </div>
+      <div className="h-full w-full flex flex-col pl-10">
+        <h1 className="font-bold text-xl line-clamp-3 mb-2">{data.title}</h1>
+        <h2 className="text-sm">
+          Shared by {data.author ? data.author : "unknown"}
+        </h2>
+        <h3 className="text-sm mt-4 mb-2">Description</h3>
+        <p className="text-xs line-clamp-5">{data.description}</p>
       </div>
     </div>
   );

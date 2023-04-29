@@ -70,7 +70,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
       }
     }
     getCurrentUser();
-  }, [getUser]);
+  }, []);
 
   const signUp = async (username: string, password: string) => {
     try {
