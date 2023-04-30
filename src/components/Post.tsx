@@ -16,7 +16,10 @@ const Post: FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className="border border-black w-full h-[calc(200px+2rem)] sm:h-auto my-4 flex flex-row sm:flex-col sm:items-center p-4 bg-white overflow-hidden">
+    <div
+      data-testid={`post-${data.videoId}`}
+      className="border border-black w-full h-[calc(200px+2rem)] sm:h-auto my-4 flex flex-row sm:flex-col sm:items-center p-4 bg-white overflow-hidden"
+    >
       <div className="h-full w-[300px] flex flex-row items-center justify-center">
         <Youtube videoId={data.videoId} opts={opts} />
       </div>

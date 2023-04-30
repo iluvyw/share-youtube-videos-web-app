@@ -49,14 +49,14 @@ const Share: FC = () => {
           });
 
           if (response === Response.SUCCESS) {
-            alert("Share Successfully");
+            alert("Share successfully");
             navigate(-1);
           } else {
             alert("Fail to share your video, please try again");
           }
         }
         setLoading(false);
-      }, 500);
+      }, 2500);
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -83,6 +83,7 @@ const Share: FC = () => {
             disabled={loading}
             className="border border-black outline-none ml-4 w-48 px-2 py-1"
             ref={inputRef}
+            placeholder="Youtube URL"
           />
         </div>
         <button

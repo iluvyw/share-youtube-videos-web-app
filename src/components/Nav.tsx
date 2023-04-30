@@ -15,7 +15,11 @@ const Nav: FC = () => {
     const username = usernameInputRef.current?.value;
     const password = passwordInputRef.current?.value;
     if (username && password) {
-      signIn && (await signIn(username, password));
+      if (username.length < 6 || password.length < 6) {
+        alert("Username and password should contain more than 6 characters");
+      } else {
+        signIn && (await signIn(username, password));
+      }
     }
     setInputDisabled(false);
   }, [signIn]);

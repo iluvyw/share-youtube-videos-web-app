@@ -97,7 +97,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
       const hashPassword = currentUser.password;
       const salt = currentUser.salt;
       if (hash(password + salt) === hashPassword) {
-        alert("Login Successfully");
+        alert("Login successfully");
         setUser({ username, password });
         setEncodedData({ username, password });
       } else {
