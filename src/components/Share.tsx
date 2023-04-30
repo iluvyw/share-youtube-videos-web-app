@@ -64,9 +64,9 @@ const Share: FC = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen">
-      <div className="w-[1000px] h-[700px] border border-black flex flex-col items-center justify-center py-10">
+      <div className="w-full h-[500px] border border-black flex flex-col items-center justify-center py-10">
         <h1 className="font-bold text-2xl mb-auto">Share a Youtube movie</h1>
-        <div className="w-[500px] h-[360px] bg-gray-500 mb-10 flex flex-col items-center justify-center">
+        <div className="w-[300px] h-[200px] bg-gray-500 mb-10 flex flex-col items-center justify-center">
           {thumbnailPreview ? (
             <img
               src={thumbnailPreview}
@@ -81,7 +81,7 @@ const Share: FC = () => {
           <h2>Youtube URL</h2>
           <input
             disabled={loading}
-            className="border border-black outline-none ml-4 w-96 px-4 py-2"
+            className="border border-black outline-none ml-4 w-48 px-2 py-1"
             ref={inputRef}
           />
         </div>
