@@ -25,14 +25,18 @@ const Nav: FC = () => {
   }, [signIn]);
 
   return (
-    <div className="fixed mx-60 xl:mx-40 lg:mx-8 top-0 left-0 w-[calc(100%-30rem)] xl:w-[calc(100%-20rem)] lg:w-[calc(100%-4rem)] h-20 bg-white flex flex-row items-center border-b border-black z-10">
+    <div className="sm:hidden fixed mx-60 xl:mx-40 lg:mx-8 top-0 left-0 w-[calc(100%-30rem)] xl:w-[calc(100%-20rem)] lg:w-[calc(100%-4rem)] h-20 bg-white flex flex-row items-center border-b border-black z-10">
       <div
         className="flex flex-row items-center cursor-pointer"
         onClick={() => {
           navigate("/");
         }}
       >
-        <img src={Home} className="w-[40px] h-[40px] object-contain" />
+        <img
+          src={Home}
+          alt="home"
+          className="w-[40px] h-[40px] object-contain"
+        />
         <h1 className="text-3xl ml-4 font-bold lg:hidden">Funny Movies</h1>
       </div>
       {user == null || user == undefined ? (
@@ -48,6 +52,7 @@ const Nav: FC = () => {
             className="border border-black outline-none mr-4 w-40 px-4 py-2"
             ref={passwordInputRef}
             placeholder="password"
+            type="password"
           />
           <button
             className="border border-black w-40 py-2 text-center bg-white hover:bg-black active:bg-black hover:text-white duration-300"
